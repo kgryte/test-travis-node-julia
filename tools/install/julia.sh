@@ -20,7 +20,7 @@ install_julia() {
 	cd ..
 
 	# Upgrade to the latest version of `git`:
-	sudo apt-get install git-all
+	# sudo apt-get install git-all
 
 	# Use `https` instead of `git`:
 	git config --global url."https://".insteadOf git://

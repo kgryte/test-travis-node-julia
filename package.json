@@ -13,9 +13,7 @@
     }
   ],
   "scripts": {
-    "test": "tape \"./test/*.js\"",
-    "test-cov": "istanbul cover --dir ./reports/coverage --report lcov tape -- \"./test/*.js\"",
-    "coverage": "istanbul cover --dir ./reports/codecov/coverage --report lcovonly tape -- \"./test/*.js\" && cat ./reports/codecov/coverage/lcov.info | codecov && rm -rf ./reports/codecov"
+    "test": "tape \"./test/*.js\""
   },
   "main": "./lib",
   "repository": {
@@ -28,11 +26,6 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "codecov": "1.x.x",
-    "istanbul": "^0.4.1",
-    "jshint": "2.x.x",
-    "jshint-stylish": "2.x.x",
-    "tap-spec": "4.x.x",
     "tape": "4.x.x"
   },
   "license": "MIT"
