@@ -10,7 +10,7 @@ compiler:
   - "g++-5 -m64"
 addons:
   apt:
-    source:
+    sources:
       - ubuntu-toolchain-r-test
     packages:
       - bar
