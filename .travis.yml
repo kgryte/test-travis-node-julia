@@ -3,7 +3,7 @@
 language: node_js
 
 # Is `sudo` required? If not, jobs are run on container-based infrastructure.
-sudo: sudo
+sudo: true
 
 node_js:
   - 'node'
