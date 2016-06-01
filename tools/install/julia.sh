@@ -26,12 +26,16 @@ install_julia() {
 	# git config --global url."https://".insteadOf git://
 
 	# Clone the latest stable version of Julia from the Julia repository:
-	echo 'Cloning the latest stable version of Julia...\n'
+	echo ''
+	echo 'Cloning the latest stable version of Julia...'
 	git clone --depth=50 --branch=release-0.4 git://github.com/JuliaLang/julia.git julia
+	echo ''
 
 	# Navigate to the cloned directory:
-	echo 'Entering Julia directory...\n'
+	echo ''
+	echo 'Entering Julia directory...'
 	cd julia
+	echo ''
 
 	make check-whitespace
 	contrib/travis_fastfail.sh || exit 1;
@@ -44,15 +48,19 @@ install_julia() {
     ln -s /usr/bin/gcc-5 $HOME/bin/x86_64-linux-gnu-gcc;
     ln -s /usr/bin/g++-5 $HOME/bin/x86_64-linux-gnu-g++;
 
-    echo 'The current gcc version...\n'
+    echo ''
+    echo 'The current gcc version...'
     gcc --version;
+    echo ''
 
     BUILDOPTS="-j3 VERBOSE=1 FORCE_ASSERTIONS=1 LLVM_ASSERTIONS=1";
     echo "override ARCH=$ARCH" >> Make.user;
     TESTSTORUN="all";
 
-    echo 'Cloning helper utilities repository...\n'
+    echo ''
+    echo 'Cloning helper utilities repository...'
     git clone -q git://git.kitenet.net/moreutils
+    echo ''
 
     make -C moreutils mispipe
     make $BUILDOPTS -C base version_git.jl.phony
@@ -60,22 +68,28 @@ install_julia() {
 
 
 	# Run `make` to build the `julia` executable:
-	echo 'Building the Julia executable...\n'
+	echo ''
+	echo 'Building the Julia executable...'
 	make
+	echo ''
 
 	# Add the Julia directory to the executable path for this shell session:
 	export PATH="$(pwd):$PATH"
 
 	# Test that the installation is working properly:
-	echo 'Testing the Julia installation...\n'
+	echo ''
+	echo 'Testing the Julia installation...'
 	make testall
+	echo ''
 
 	# Navigate back to project directory:
 	cd ../test-travis-node-julia
 
 	# Run tests:
-	echo 'Running Node.js tests...\n'
+	echo ''
+	echo 'Running Node.js tests...'
 	npm run test-cov
+	echo ''
 }
 
 # Runs clean-up tasks.
