@@ -26,24 +26,48 @@ install_julia() {
 	git config --global url."https://".insteadOf git://
 
 	# Clone the latest stable version of Julia from the Julia repository:
+	echo 'Cloning the latest stable version of Julia...'
 	git clone --depth=50 --branch=release-0.4 git://github.com/JuliaLang/julia.git julia
 
 	# Navigate to the cloned directory:
 	cd julia
 
+	make check-whitespace
+	contrib/travis_fastfail.sh || exit 1;
+    mkdir -p $HOME/bin;
+    ln -s /usr/bin/gcc-5 $HOME/bin/gcc;
+    ln -s /usr/bin/g++-5 $HOME/bin/g++;
+    ln -s /usr/bin/gfortran-5 $HOME/bin/gfortran;
+    ln -s /usr/bin/gcc-5 $HOME/bin/x86_64-linux-gnu-gcc;
+    ln -s /usr/bin/g++-5 $HOME/bin/x86_64-linux-gnu-g++;
+    gcc --version;
+    BUILDOPTS="-j3 VERBOSE=1 FORCE_ASSERTIONS=1 LLVM_ASSERTIONS=1";
+    echo "override ARCH=$ARCH" >> Make.user;
+    TESTSTORUN="all";
+
+    git clone -q git://git.kitenet.net/moreutils
+
+    make -C moreutils mispipe
+    make $BUILDOPTS -C base version_git.jl.phony
+    moreutils/mispipe "make $BUILDOPTS NO_GIT=1 -C deps" bar > deps.log || cat deps.log
+
+
 	# Run `make` to build the `julia` executable:
+	echo 'Building the Julia executable...'
 	make
 
 	# Add the Julia directory to the executable path for this shell session:
 	export PATH="$(pwd):$PATH"
 
 	# Test that the installation is working properly:
+	echo 'Testing the Julia installation...'
 	make testall
 
 	# Navigate back to project directory:
 	cd ../test-travis-node-julia
 
 	# Run tests:
+	echo 'Running Node.js tests...'
 	npm run test-cov
 }
 
