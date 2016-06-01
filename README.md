@@ -18,5 +18,5 @@ Test
 Copyright &copy; 2016. Athan Reines.
 
 
-[build-image]: http://img.shields.io/travis//master.svg
-[build-url]: https://travis-ci.org/
+[build-image]: http://img.shields.io/travis/kgryte/test-travis-node-julia/master.svg
+[build-url]: https://travis-ci.org/kgryte/test-travis-node-julia
