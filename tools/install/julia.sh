@@ -23,7 +23,7 @@ install_julia() {
 	# sudo apt-get install git-all
 
 	# Use `https` instead of `git`:
-	git config --global url."https://".insteadOf git://
+	# git config --global url."https://".insteadOf git://
 
 	# Clone the latest stable version of Julia from the Julia repository:
 	echo 'Cloning the latest stable version of Julia...'
