@@ -3,5 +3,6 @@ sudo: true
 node_js:
   - 'node'
 script:
+  - chmod +x ./tools/install/julia.sh
   - ./tools/install/julia.sh
 
