@@ -2,20 +2,21 @@ language: node_js
 sudo: false
 node_js:
   - 'node'
-matrix:
-  include:
-    - os: linux
-      env: ARCH="x86_64"
-      compiler: "g++-5 -m64"
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - bar
-            - time
-            - g++-5
-            - gfortran-5
+os:
+  - linux
+env:
+  - ARCH="x86_64"
+compiler:
+  - "g++-5 -m64"
+addons:
+  apt:
+    source:
+      - ubuntu-toolchain-r-test
+    packages:
+      - bar
+      - time
+      - g++-5
+      - gfortran-5
 script:
   - git --version
   - chmod +x ./tools/install/julia.sh
