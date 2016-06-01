@@ -26,13 +26,11 @@ install_julia() {
 	# git config --global url."https://".insteadOf git://
 
 	# Clone the latest stable version of Julia from the Julia repository:
-	echo ''
 	echo 'Cloning the latest stable version of Julia...'
 	git clone --depth=50 --branch=release-0.4 git://github.com/JuliaLang/julia.git julia
 	echo ''
 
 	# Navigate to the cloned directory:
-	echo ''
 	echo 'Entering Julia directory...'
 	cd julia
 	echo ''
@@ -48,7 +46,6 @@ install_julia() {
     ln -s /usr/bin/gcc-5 $HOME/bin/x86_64-linux-gnu-gcc;
     ln -s /usr/bin/g++-5 $HOME/bin/x86_64-linux-gnu-g++;
 
-    echo ''
     echo 'The current gcc version...'
     gcc --version;
     echo ''
@@ -57,7 +54,6 @@ install_julia() {
     echo "override ARCH=$ARCH" >> Make.user;
     TESTSTORUN="all";
 
-    echo ''
     echo 'Cloning helper utilities repository...'
     git clone -q git://git.kitenet.net/moreutils
     echo ''
@@ -66,9 +62,10 @@ install_julia() {
     make $BUILDOPTS -C base version_git.jl.phony
     moreutils/mispipe "make $BUILDOPTS NO_GIT=1 -C deps" bar > deps.log || cat deps.log
 
+    ls
+    cat ./config.log
 
 	# Run `make` to build the `julia` executable:
-	echo ''
 	echo 'Building the Julia executable...'
 	make
 	echo ''
@@ -77,7 +74,6 @@ install_julia() {
 	export PATH="$(pwd):$PATH"
 
 	# Test that the installation is working properly:
-	echo ''
 	echo 'Testing the Julia installation...'
 	make testall
 	echo ''
@@ -86,7 +82,6 @@ install_julia() {
 	cd ../test-travis-node-julia
 
 	# Run tests:
-	echo ''
 	echo 'Running Node.js tests...'
 	npm run test-cov
 	echo ''
