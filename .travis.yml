@@ -4,6 +4,7 @@ node_js:
   - 'node'
 os:
   - linux
+  - osx
 script:
   - chmod +x ./tools/install/julia.sh
   - ./tools/install/julia.sh

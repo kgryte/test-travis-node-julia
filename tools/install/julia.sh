@@ -16,21 +16,27 @@ on_error() {
 
 # Installs Julia.
 install_julia() {
-	# Add personal package archives (PPAs) for updating to the latest stable Julia versions...
-	echo 'Adding PPAs...'
-	sudo add-apt-repository ppa:staticfloat/juliareleases -y
-	sudo add-apt-repository ppa:staticfloat/julia-deps -y
-	echo ''
+	if [ "$TRAVIS_OS_NAME" == "osx" ]; then
+		MOUNTDIR=$(echo `hdiutil mount https://s3.amazonaws.com/julialang/bin/osx/x64/0.4/julia-0.4.5-osx10.7+.dmg | tail -1 | awk '{$1=$2=""; print $0}'` | xargs -0 echo)
+		sudo installer -pkg "${MOUNTDIR}/"*.pkg -target /
 
-	# Download and update package lists:
-	echo 'Updating package lists...'
-	sudo apt-get update
-	echo ''
+	else
+		# Add personal package archives (PPAs) for updating to the latest stable Julia versions...
+		echo 'Adding PPAs...'
+		sudo add-apt-repository ppa:staticfloat/juliareleases -y
+		sudo add-apt-repository ppa:staticfloat/julia-deps -y
+		echo ''
 
-	# Install Julia:
-	echo 'Installing Julia...'
-	sudo apt-get install julia
-	echo ''
+		# Download and update package lists:
+		echo 'Updating package lists...'
+		sudo apt-get update
+		echo ''
+
+		# Install Julia:
+		echo 'Installing Julia...'
+		sudo apt-get install julia
+		echo ''
+	fi
 
 	julia --version
 	echo ''
