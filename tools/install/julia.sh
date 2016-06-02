@@ -27,7 +27,7 @@ install_julia() {
 	sudo apt-get update
 	echo ''
 
-	# Installing Julia...
+	# Install Julia...
 	echo 'Installing Julia...'
 	sudo apt-get install julia
 	echo ''

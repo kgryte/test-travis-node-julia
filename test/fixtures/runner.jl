@@ -22,7 +22,7 @@ julia> gen( x, \"data.json\" );
 function gen( x, name )
 	y = Array( Any, length(x) );
 	for i in eachindex(x)
-		y[ i ] = bits( x );
+		y[ i ] = bits( x[i] );
 	end
 
 	# Store data to be written to file as a collection:
