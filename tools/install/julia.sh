@@ -35,6 +35,26 @@ install_julia() {
 	julia --version
 	echo ''
 
+	# Navigate to the test fixtures directory...
+	echo 'Navigating to test fixtures directory...'
+	cd ./test/fixtures
+	echo ''
+
+	# Install the required dependencies...
+	echo 'Installing Julia dependencies...'
+	julia -e 'Pkg.add()'
+	echo ''
+
+	# Generate test fixtures...
+	echo 'Generating test fixtures...'
+	julia -e 'include("./runner.jl")'
+	cat data.json
+	echo ''
+
+	# Navigate back to the parent directory...
+	echo 'Navigating back to the parent directory...'
+	cd ../..
+
 	# Run tests:
 	echo 'Running Node.js tests...'
 	npm run test
