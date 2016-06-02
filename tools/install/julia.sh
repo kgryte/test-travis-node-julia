@@ -62,7 +62,7 @@ install_julia() {
     make $BUILDOPTS -C base version_git.jl.phony
     moreutils/mispipe "make $BUILDOPTS NO_GIT=1 -C deps" bar > deps.log || cat deps.log
 
-    ls
+    ./configure
     cat ./config.log
 
 	# Run `make` to build the `julia` executable:
