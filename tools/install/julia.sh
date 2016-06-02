@@ -42,7 +42,7 @@ install_julia() {
 
 	# Install the required dependencies...
 	echo 'Installing Julia dependencies...'
-	julia -e 'Pkg.add()'
+	julia -e 'Pkg.resolve()'
 	echo ''
 
 	# Generate test fixtures...
