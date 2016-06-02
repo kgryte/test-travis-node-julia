@@ -16,8 +16,8 @@ on_error() {
 
 # Installs Julia.
 install_julia() {
-	sudo add-apt-repository ppa:staticfloat/juliareleases
-	sudo add-apt-repository ppa:staticfloat/julia-deps
+	sudo add-apt-repository ppa:staticfloat/juliareleases -y
+	sudo add-apt-repository ppa:staticfloat/julia-deps -y
 	sudo apt-get update
 	sudo apt-get install julia
 
