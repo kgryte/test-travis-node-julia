@@ -1,7 +1,7 @@
 {
   "name": "test-travis-node-julia",
   "version": "0.0.0",
-  "description": "Test Travis CI configuration for an environment running both Node.js and Julia.",
+  "description": "Test Travis CI configuration for an environment supporting both Node.js and Julia.",
   "author": {
     "name": "Athan Reines",
     "email": "kgryte@gmail.com"
