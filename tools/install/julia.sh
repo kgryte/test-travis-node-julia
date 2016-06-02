@@ -39,6 +39,9 @@ install_julia() {
 		echo "Cleaning up..."
 		hdiutil unmount $volume -quiet
 		rm $tmp_file
+
+		# Place the Julia executable in our path:
+		export PATH=/Applications/Julia-0.4.5.app/Contents/Resources/julia/bin/:$PATH
 	else
 		# Add personal package archives (PPAs) for updating to the latest stable Julia versions...
 		echo 'Adding PPAs...'
