@@ -1,8 +1,8 @@
-Test
+Travis CI Configuration
 ===
 [![Build Status][build-image]][build-url]
 
-> Test Travis CI configuration for an environment supporting both Node.js and Julia.
+> Travis CI configuration for an environment supporting both Node.js and Julia.
 
 
 
