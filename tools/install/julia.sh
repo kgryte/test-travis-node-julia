@@ -44,6 +44,7 @@ install_julia() {
 	echo 'Installing Julia dependencies...'
 	sort -u REQUIRE >> ~/.julia/v0.4/REQUIRE
 	julia -e 'Pkg.resolve()'
+	julia -e 'Pkg.status()'
 	echo ''
 
 	# Generate test fixtures...
