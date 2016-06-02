@@ -5,7 +5,6 @@ node_js:
 os:
   - linux
 script:
-  - git --version
   - chmod +x ./tools/install/julia.sh
   - ./tools/install/julia.sh
 

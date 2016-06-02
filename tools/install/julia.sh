@@ -16,16 +16,28 @@ on_error() {
 
 # Installs Julia.
 install_julia() {
+	# Add personal package archives (PPAs) for updating to the latest stable Julia versions...
+	echo 'Adding PPAs...'
 	sudo add-apt-repository ppa:staticfloat/juliareleases -y
 	sudo add-apt-repository ppa:staticfloat/julia-deps -y
+	echo ''
+
+	# Download and update package lists:
+	echo 'Updating package lists...'
 	sudo apt-get update
+	echo ''
+
+	# Installing Julia...
+	echo 'Installing Julia...'
 	sudo apt-get install julia
+	echo ''
 
 	julia --version
+	echo ''
 
 	# Run tests:
 	echo 'Running Node.js tests...'
-	npm run test-cov
+	npm run test
 	echo ''
 }
 
