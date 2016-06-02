@@ -42,6 +42,7 @@ install_julia() {
 
 	# Install the required dependencies...
 	echo 'Installing Julia dependencies...'
+	julia -e 'Pkg.status()'
 	sort -u REQUIRE >> ~/.julia/v0.4/REQUIRE
 	julia -e 'Pkg.resolve()'
 	julia -e 'Pkg.status()'
