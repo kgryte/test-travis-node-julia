@@ -7,5 +7,7 @@ os:
   - osx
 script:
   - chmod +x ./tools/install/julia.sh
+  - chmod +x ./tools/ci/travis.sh
   - ./tools/install/julia.sh
+  - ./tools/ci/travis.sh
 

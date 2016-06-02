@@ -2,7 +2,7 @@
 
 # DESCRIPTION #
 
-# Script to install Julia.
+# Script to install Julia on Ubuntu and OS X.
 
 
 # FUNCTIONS #
@@ -17,31 +17,34 @@ on_error() {
 # Installs Julia.
 install_julia() {
 	if [ "$TRAVIS_OS_NAME" == "osx" ]; then
+		# Specify the URL from which to download a Julia image:
 		url='https://s3.amazonaws.com/julialang/bin/osx/x64/0.4/julia-0.4.5-osx10.7+.dmg'
 
 		# Generate a random file name:
 		tmp_file=/tmp/`openssl rand -base64 10 | tr -dc '[:alnum:]'`.dmg
+
+		# Define the application folder in which to place the Julia app:
 		apps_folder='/Applications'
 
-		# Download file:
-		echo "Downloading $url..."
+		# Download the image and mount:
+		echo 'Downloading $url...'
 		curl -# -L -o $tmp_file $url
 
-		echo "Mounting image..."
+		echo 'Mounting image...'
 		volume=`hdiutil mount $tmp_file | tail -n1 | perl -nle '/(\/Volumes\/[^ ]+)/; print $1'`
 
-		# Locate `.app` folder and move to `/Applications`:
+		# Locate the Julia `.app` folder and move to `/Applications`:
 		app=`find $volume/. -name *.app -maxdepth 1 -type d -print0`
 		echo "Copying `echo $app | awk -F/ '{print $NF}'` into $apps_folder..."
 		cp -ir $app $apps_folder
 
-		# Unmount volume, deleting the temporary file:
-		echo "Cleaning up..."
+		# Unmount the volume, thus deleting the temporary file:
+		echo 'Cleaning up...'
 		hdiutil unmount $volume -quiet
 		rm $tmp_file
 
 		# Place the Julia executable in our path:
-		export PATH=/Applications/Julia-0.4.5.app/Contents/Resources/julia/bin/:$PATH
+		export PATH="$apps_folder/`echo $app | awk -F/ '{print $NF}'`/Contents/Resources/julia/bin/:$PATH"
 	else
 		# Add personal package archives (PPAs) for updating to the latest stable Julia versions...
 		echo 'Adding PPAs...'
@@ -60,36 +63,8 @@ install_julia() {
 		echo ''
 	fi
 
+	# Test that installation worked:
 	julia --version
-	echo ''
-
-	# Navigate to the test fixtures directory:
-	echo 'Navigating to test fixtures directory...'
-	cd ./test/fixtures
-	echo ''
-
-	# Install the required dependencies:
-	echo 'Installing Julia dependencies...'
-	julia -e 'Pkg.status()'
-	sort -u REQUIRE >> ~/.julia/v0.4/REQUIRE
-	julia -e 'Pkg.resolve()'
-	julia -e 'Pkg.status()'
-	echo ''
-
-	# Generate test fixtures:
-	echo 'Generating test fixtures...'
-	julia -e 'include("./runner.jl")'
-	cat data.json
-	echo ''
-
-	# Navigate back to the parent directory:
-	echo 'Navigating back to the parent directory...'
-	cd ../..
-
-	# Run tests:
-	echo 'Running Node.js tests...'
-	npm run test
-	echo ''
 }
 
 # Runs clean-up tasks.
