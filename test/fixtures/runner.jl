@@ -20,7 +20,7 @@ julia> gen( x, \"data.json\" );
 ```
 """
 function gen( x, name )
-	y = Array( any, length(x) );
+	y = Array( Any, length(x) );
 	for i in eachindex(x)
 		y[ i ] = bits( x );
 	end
