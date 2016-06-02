@@ -27,7 +27,7 @@ install_julia() {
 	sudo apt-get update
 	echo ''
 
-	# Install Julia...
+	# Install Julia:
 	echo 'Installing Julia...'
 	sudo apt-get install julia
 	echo ''
@@ -35,12 +35,12 @@ install_julia() {
 	julia --version
 	echo ''
 
-	# Navigate to the test fixtures directory...
+	# Navigate to the test fixtures directory:
 	echo 'Navigating to test fixtures directory...'
 	cd ./test/fixtures
 	echo ''
 
-	# Install the required dependencies...
+	# Install the required dependencies:
 	echo 'Installing Julia dependencies...'
 	julia -e 'Pkg.status()'
 	sort -u REQUIRE >> ~/.julia/v0.4/REQUIRE
@@ -48,13 +48,13 @@ install_julia() {
 	julia -e 'Pkg.status()'
 	echo ''
 
-	# Generate test fixtures...
+	# Generate test fixtures:
 	echo 'Generating test fixtures...'
 	julia -e 'include("./runner.jl")'
 	cat data.json
 	echo ''
 
-	# Navigate back to the parent directory...
+	# Navigate back to the parent directory:
 	echo 'Navigating back to the parent directory...'
 	cd ../..
 
