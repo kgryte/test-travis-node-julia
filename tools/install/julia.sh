@@ -44,9 +44,7 @@ install_julia() {
 		rm $tmp_file
 
 		# Permanently add Julia to the executable path:
-		echo "export PATH=$apps_folder/`echo $app | awk -F/ '{print $NF}'`/Contents/Resources/julia/bin/:$PATH" >> ~/.bash_profile
-		source ~/.bash_profile
-		cat ~/.bash_profile
+		sudo ln -s "$apps_folder/`echo $app | awk -F/ '{print $NF}'`/Contents/Resources/julia/bin/" /usr/local/bin
 	else
 		# Add personal package archives (PPAs) for updating to the latest stable Julia versions...
 		echo 'Adding PPAs...'
