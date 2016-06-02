@@ -50,21 +50,20 @@ install_julia() {
 		echo 'Adding PPAs...'
 		sudo add-apt-repository ppa:staticfloat/juliareleases -y
 		sudo add-apt-repository ppa:staticfloat/julia-deps -y
-		echo ''
 
 		# Download and update package lists:
 		echo 'Updating package lists...'
 		sudo apt-get update
-		echo ''
 
 		# Install Julia:
 		echo 'Installing Julia...'
 		sudo apt-get install julia
-		echo ''
 	fi
 
-	# Test that installation worked:
+	# Test installation:
 	julia --version
+
+	echo 'Julia successfully installed.'
 }
 
 # Runs clean-up tasks.
